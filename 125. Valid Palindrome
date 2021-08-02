@@ -1,0 +1,55 @@
+--------------
+|  Question  |
+--------------
+
+Given a string s, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
+
+ 
+
+Example 1:
+
+Input: s = "A man, a plan, a canal: Panama"
+Output: true
+Explanation: "amanaplanacanalpanama" is a palindrome.
+Example 2:
+
+Input: s = "race a car"
+Output: false
+Explanation: "raceacar" is not a palindrome.
+ 
+
+Constraints:
+
+1 <= s.length <= 2 * 105
+s consists only of printable ASCII characters.
+
+--------------
+|  Solution  |
+--------------
+
+class Solution {
+public:
+    string lower(string s){
+        string res = "";
+        for(int i = 0; i < s.length(); i++){
+            if(s[i]>='A' && s[i]<='Z'){
+                res += s[i];
+            }else if(s[i]>='a' && s[i]<='z'){
+                res += s[i];
+            }else if(s[i]>='0' && s[i]<='9'){
+                res += to_string(s[i]-48);
+            }  
+        }
+        return res;
+    }
+    bool isPalindrome(string s1) {
+        string str = lower(s1);
+        transform(str.begin(),str.end(),str.begin(),::tolower);
+        for(int i = 0; i < str.length()/2; i++){
+            if(str[i] != str[str.length()-i-1]){
+                return false;
+            }
+        }
+        return true;
+    }
+};
